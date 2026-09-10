@@ -7,7 +7,11 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "tauri": "tauri"
+    "tauri": "tauri",
+    "format": "prettier --write \"src/**/*.{ts,css,html}\" \"index.html\" && cargo fmt --manifest-path src-tauri/Cargo.toml",
+    "typecheck": "tsc --noEmit && cargo check --manifest-path src-tauri/Cargo.toml",
+    "lint": "cargo clippy --manifest-path src-tauri/Cargo.toml -- -D warnings",
+    "test": "cargo test --manifest-path src-tauri/Cargo.toml"
   },
   "dependencies": {
     "@tauri-apps/api": "^2",
@@ -15,7 +19,8 @@
   },
   "devDependencies": {
     "@tauri-apps/cli": "^2",
-		"vite": "^8.0.16",
-    "typescript": "~6.0.3"
+    "prettier": "^3.9.6",
+    "typescript": "~6.0.3",
+    "vite": "^8.0.16"
   }
 }
