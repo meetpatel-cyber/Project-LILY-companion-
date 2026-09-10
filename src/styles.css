@@ -12,7 +12,7 @@
   font-weight: 400;
 
   color: #0f0f0f;
-  background-color: #f6f6f6;
+  background-color: transparent;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -21,13 +21,71 @@
   -webkit-text-size-adjust: 100%;
 }
 
+body {
+  margin: 0;
+  padding: 0;
+  background-color: rgba(246, 246, 246, 0.95);
+  border-radius: 12px;
+  overflow: hidden;
+  height: 100vh;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
 .container {
   margin: 0;
-  padding-top: 10vh;
+  padding-top: 5vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   text-align: center;
+  flex: 1;
+}
+
+.titlebar-container {
+  display: flex;
+  height: 30px;
+}
+
+.titlebar {
+  flex: 1;
+  background: transparent;
+  user-select: none;
+}
+
+.titlebar-controls {
+  display: flex;
+  height: 30px;
+}
+
+.titlebar-button {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 30px;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 0;
+  font-size: 14px;
+}
+
+.titlebar-button:hover {
+  background: rgba(0, 0, 0, 0.1);
+  border-color: transparent;
+}
+
+.titlebar-button:active {
+  background: rgba(0, 0, 0, 0.2);
+  border-color: transparent;
+}
+
+#titlebar-close:hover {
+  background: #e81123;
+  color: white;
 }
 
 .logo {
@@ -98,7 +156,19 @@ button {
 @media (prefers-color-scheme: dark) {
   :root {
     color: #f6f6f6;
-    background-color: #2f2f2f;
+    background-color: transparent;
+  }
+
+  body {
+    background-color: rgba(47, 47, 47, 0.95);
+  }
+
+  .titlebar-button:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  .titlebar-button:active {
+    background: rgba(255, 255, 255, 0.2);
   }
 
   a:hover {
