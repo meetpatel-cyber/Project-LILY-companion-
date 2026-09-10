@@ -1,7 +1,15 @@
-# Tauri + Vanilla TS
+# Project LILY Companion
 
-This template should help get you started developing with Tauri in vanilla HTML, CSS and Typescript.
+Project LILY is a lightweight local AI desktop companion. 
 
-## Recommended IDE Setup
+## Documentation
+Please refer to the [Engineering Contract](./docs/ENGINEERING_CONTRACT.md) for the core philosophies, privacy boundaries, and development workflow governing this project.
 
-- [VS Code](https://code.visualstudio.com/) + [Tauri](https://marketplace.visualstudio.com/items?itemName=tauri-apps.tauri-vscode) + [rust-analyzer](https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer)
+## Development Setup
+- `npm run dev`: Starts the Vite development server
+- `npm run build`: Builds the frontend and Tauri application
+- `npm run tauri dev`: Starts the desktop application in development mode
+- `npm run format`: Formats code
+- `npm run typecheck`: Typechecks the application
+- `npm run lint`: Lints the Rust backend
+- `npm run test`: Runs tests
