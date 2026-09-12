@@ -1,5 +1,9 @@
 import { invoke } from "@tauri-apps/api/core";
-import { getCurrentWindow } from "@tauri-apps/api/window";
+import {
+  getCurrentWindow,
+  PhysicalPosition,
+  availableMonitors,
+} from "@tauri-apps/api/window";
 
 const appWindow = getCurrentWindow();
 
@@ -15,6 +19,47 @@ async function greet() {
   }
 }
 
+async function restorePosition() {
+  const savedPos = localStorage.getItem("lily-window-pos");
+  if (savedPos) {
+    try {
+      const pos = JSON.parse(savedPos);
+      if (typeof pos.x === "number" && typeof pos.y === "number") {
+        const monitors = await availableMonitors();
+        let isVisible = false;
+        for (const m of monitors) {
+          const mx = m.position.x;
+          const my = m.position.y;
+          const mw = m.size.width;
+          const mh = m.size.height;
+          // Check if window is at least partially visible (100px margin)
+          if (
+            pos.x >= mx - 100 &&
+            pos.x <= mx + mw - 100 &&
+            pos.y >= my - 100 &&
+            pos.y <= my + mh - 100
+          ) {
+            isVisible = true;
+            break;
+          }
+        }
+        if (isVisible) {
+          await appWindow.setPosition(new PhysicalPosition(pos.x, pos.y));
+        }
+      }
+    } catch (e) {
+      console.warn("Failed to restore position", e);
+    }
+  }
+
+  appWindow.onMoved(({ payload }) => {
+    localStorage.setItem(
+      "lily-window-pos",
+      JSON.stringify({ x: payload.x, y: payload.y }),
+    );
+  });
+}
+
 window.addEventListener("DOMContentLoaded", () => {
   greetInputEl = document.querySelector("#greet-input");
   greetMsgEl = document.querySelector("#greet-msg");
@@ -23,9 +68,14 @@ window.addEventListener("DOMContentLoaded", () => {
     greet();
   });
 
-  document.querySelector(".titlebar")?.addEventListener("mousedown", (e) => {
+  document.querySelector(".container")?.addEventListener("mousedown", (e) => {
     // Use type assertion to tell TypeScript this is a MouseEvent
-    if ((e as MouseEvent).buttons === 1) {
+    const target = e.target as HTMLElement;
+    if (
+      (e as MouseEvent).buttons === 1 &&
+      target.tagName !== "INPUT" &&
+      target.tagName !== "BUTTON"
+    ) {
       appWindow.startDragging();
     }
   });
@@ -49,4 +99,9 @@ window.addEventListener("DOMContentLoaded", () => {
         if (greetMsgEl) greetMsgEl.textContent = "Close error: " + e.toString();
       }
     });
+
+  // Phase 1B Logic
+
+  // 1. Position Persistence
+  restorePosition();
 });

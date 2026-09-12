@@ -10,16 +10,16 @@
 
   <body>
     <div class="titlebar-container">
-      <div data-tauri-drag-region class="titlebar"></div>
+      <div class="titlebar"></div>
       <div class="titlebar-controls">
         <button id="titlebar-minimize" class="titlebar-button">_</button>
         <button id="titlebar-close" class="titlebar-button">✕</button>
       </div>
     </div>
-    <main class="container">
-      <h1>Welcome to Tauri</h1>
+    <main class="container" data-tauri-drag-region>
+      <h1 data-tauri-drag-region>Welcome to Tauri</h1>
 
-      <div class="row">
+      <div class="row" data-tauri-drag-region>
         <a href="https://vite.dev" target="_blank">
           <img src="/src/assets/vite.svg" class="logo vite" alt="Vite logo" />
         </a>
@@ -38,7 +38,9 @@
           />
         </a>
       </div>
-      <p>Click on the Tauri logo to learn more about the framework</p>
+      <p data-tauri-drag-region>
+        Click on the Tauri logo to learn more about the framework
+      </p>
 
       <form class="row" id="greet-form">
         <input id="greet-input" placeholder="Enter a name..." />

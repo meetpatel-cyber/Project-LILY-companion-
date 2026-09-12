@@ -24,9 +24,7 @@
 body {
   margin: 0;
   padding: 0;
-  background-color: rgba(246, 246, 246, 0.95);
-  border-radius: 12px;
-  overflow: hidden;
+  background-color: transparent;
   height: 100vh;
   box-sizing: border-box;
   display: flex;
@@ -160,7 +158,7 @@ button {
   }
 
   body {
-    background-color: rgba(47, 47, 47, 0.95);
+    background-color: transparent;
   }
 
   .titlebar-button:hover {
